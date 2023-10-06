@@ -48,6 +48,7 @@ const resetCalc = () => {
 
 // Evaluation function
 const evalCalc = () => {
+  // Prevent division by 0
   if (input2 === 0 && operator === "/") {
     resetCalc();
     display.textContent = "👀 Don't do that";
