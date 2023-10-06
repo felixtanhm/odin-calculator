@@ -1,0 +1,11 @@
+#inputs {
+  display: grid;
+  width: 400px;
+  height: 400px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.btn-2x {
+  grid-column: span 2;
+}
