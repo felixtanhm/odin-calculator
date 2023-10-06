@@ -1,5 +1,6 @@
 let input1, input2, operator;
 
+// Operator functions
 const add = () => {
   return Number(input1) + Number(input2);
 };
@@ -16,6 +17,7 @@ const divide = () => {
   return Number(input1) / Number(input2);
 };
 
+// Utility functions
 const sign = () => {
   input2 ? (input2 *= -1) : (input1 *= -1);
 };
@@ -24,6 +26,13 @@ const hundreds = () => {
   input2 ? (input2 /= 100) : (input1 /= 100);
 };
 
+const resetCalc = () => {
+  input1 = "";
+  input2 = "";
+  operator = "";
+};
+
+// Evaluation function
 const evalCalc = () => {
   let result;
   if (operator === "+") {
@@ -39,12 +48,7 @@ const evalCalc = () => {
   input1 = result;
 };
 
-const resetCalc = () => {
-  input1 = "";
-  input2 = "";
-  operator = "";
-};
-
+// Event Handlers
 const handleOperandClick = (event) => {
   let number = Number(event.target.textContent);
   input1 ? (input2 = number) : (input1 = number);
@@ -64,6 +68,7 @@ const handleUtilClick = (event) => {
   else if (util === "hundreds") hundreds();
 };
 
+// Add event listeners to buttons
 let operands = document.querySelectorAll(".operand");
 operands.forEach((operand) => {
   operand.addEventListener("click", handleOperandClick);
