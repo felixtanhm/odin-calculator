@@ -1,4 +1,5 @@
 let input1, input2, operator;
+let display = document.querySelector("#display");
 
 // Operator functions
 const add = () => {
@@ -19,39 +20,54 @@ const divide = () => {
 
 // Utility functions
 const sign = () => {
-  input2 ? (input2 *= -1) : (input1 *= -1);
+  if (input2) {
+    input2 *= -1;
+    display.textContent = input2;
+  } else {
+    input1 *= -1;
+    display.textContent = input1;
+  }
 };
 
 const hundreds = () => {
-  input2 ? (input2 /= 100) : (input1 /= 100);
+  if (input2) {
+    input2 /= 100;
+    display.textContent = input2;
+  } else {
+    input1 /= 100;
+    display.textContent = input1;
+  }
 };
 
 const resetCalc = () => {
   input1 = "";
   input2 = "";
   operator = "";
+  display.textContent = 0;
 };
 
 // Evaluation function
 const evalCalc = () => {
   let result;
   if (operator === "+") {
-    result = add(input1, input2);
+    result = add();
   } else if (operator === "-") {
-    result = subtract(input1, input2);
+    result = subtract();
   } else if (operator === "*") {
-    result = multiply(input1, input2);
+    result = multiply();
   } else if (operator === "/") {
-    result = divide(input1, input2);
+    result = divide();
   }
   resetCalc();
   input1 = result;
+  display.textContent = result;
 };
 
 // Event Handlers
 const handleOperandClick = (event) => {
   let number = Number(event.target.textContent);
   input1 ? (input2 = number) : (input1 = number);
+  display.textContent = number;
 };
 
 const handleOperatorClick = (event) => {
