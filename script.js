@@ -48,6 +48,11 @@ const resetCalc = () => {
 
 // Evaluation function
 const evalCalc = () => {
+  if (input2 === 0 && operator === "/") {
+    resetCalc();
+    display.textContent = "👀 Don't do that";
+    return;
+  }
   let result;
   if (operator === "+") {
     result = add();
