@@ -1,93 +1,101 @@
-let input1, input2, operator;
+let operand1 = "",
+  operand2 = "",
+  currentOperator = "";
+let displayRefresh = true;
 let display = document.querySelector("#display");
 
-// Operator functions
-const add = () => {
-  return Number(input1) + Number(input2);
+// currentOperator functions
+const add = (a, b) => {
+  return a + b;
 };
 
-const subtract = () => {
-  return Number(input1) - Number(input2);
+const subtract = (a, b) => {
+  return a - b;
 };
 
-const multiply = () => {
-  return Number(input1) * Number(input2);
+const multiply = (a, b) => {
+  return a * b;
 };
 
-const divide = () => {
-  return Number(input1) / Number(input2);
+const divide = (a, b) => {
+  return a / b;
 };
 
 // Utility functions
-const sign = () => {
-  if (input2) {
-    input2 *= -1;
-    display.textContent = input2;
-  } else {
-    input1 *= -1;
-    display.textContent = input1;
+const operate = () => {
+  let firstNum = Number(operand1);
+  let secondNum = Number(operand2);
+
+  if (currentOperator === "+") {
+    return add(firstNum, secondNum);
+  } else if (currentOperator === "-") {
+    return subtract(firstNum, secondNum);
+  } else if (currentOperator === "*") {
+    return multiply(firstNum, secondNum);
+  } else if (currentOperator === "/") {
+    return divide(firstNum, secondNum);
   }
 };
 
-const hundreds = () => {
-  if (input2) {
-    input2 /= 100;
-    display.textContent = input2;
-  } else {
-    input1 /= 100;
-    display.textContent = input1;
-  }
+const roundResult = (num) => {
+  return Math.round(num * 100000000) / 100000000;
 };
 
-const resetCalc = () => {
-  input1 = "";
-  input2 = "";
-  operator = "";
-  display.textContent = 0;
+const resetCalculator = () => {
+  operand1 = "";
+  operand2 = "";
+  currentOperator = "";
+  displayRefresh = true;
+  display.textContent = "0";
 };
 
 // Evaluation function
-const evalCalc = () => {
-  // Prevent division by 0
-  if (input2 === 0 && operator === "/") {
-    resetCalc();
-    display.textContent = "👀 Don't do that";
+const evaluate = () => {
+  if (currentOperator === "") return;
+  if (operand2 === 0 && currentOperator === "/") {
+    // Prevent division by 0
+    resetCalculator();
+    display.textContent = "Infinity 🚀 & beyond? 👀";
     return;
   }
-  let result;
-  if (operator === "+") {
-    result = add();
-  } else if (operator === "-") {
-    result = subtract();
-  } else if (operator === "*") {
-    result = multiply();
-  } else if (operator === "/") {
-    result = divide();
-  }
-  resetCalc();
-  input1 = result;
-  display.textContent = result;
+
+  operand2 = display.textContent;
+  let result = operate();
+
+  resetCalculator();
+  display.textContent = roundResult(result);
 };
 
 // Event Handlers
 const handleOperandClick = (event) => {
-  let number = Number(event.target.textContent);
-  input1 ? (input2 = number) : (input1 = number);
-  display.textContent = number;
+  if (displayRefresh) {
+    display.textContent = event.target.textContent;
+    displayRefresh = false;
+  } else {
+    display.textContent = display.textContent + event.target.textContent;
+  }
 };
 
 const handleOperatorClick = (event) => {
-  if (input2) {
-    evalCalc();
-  }
-  operator = event.target.value;
+  if (currentOperator !== "") evaluate();
+  operand1 = display.textContent;
+  currentOperator = event.target.value;
+  displayRefresh = true;
 };
 
 const handleUtilClick = (event) => {
   let util = event.target.value;
-  if (util === "clear") resetCalc();
-  else if (util === "sign") sign();
-  else if (util === "hundreds") hundreds();
+  if (util === "clear") resetCalculator();
+  else if (util === "sign") {
+    display.textContent = Number(display.textContent) * -1;
+  } else if (util === "hundreds") {
+    display.textContent = Number(display.textContent) / 100;
+  }
+};
+
+const handleDecimal = () => {
+  if (display.textContent.includes(".")) return;
+  display.textContent = display.textContent + ".";
 };
 
 // Add event listeners to buttons
@@ -96,9 +104,9 @@ operands.forEach((operand) => {
   operand.addEventListener("click", handleOperandClick);
 });
 
-let operators = document.querySelectorAll(".operator");
-operators.forEach((operator) => {
-  operator.addEventListener("click", handleOperatorClick);
+let currentOperators = document.querySelectorAll(".operator");
+currentOperators.forEach((currentOperator) => {
+  currentOperator.addEventListener("click", handleOperatorClick);
 });
 
 let utilities = document.querySelectorAll(".util");
@@ -106,5 +114,5 @@ utilities.forEach((util) => {
   util.addEventListener("click", handleUtilClick);
 });
 
-document.querySelector("#equals").addEventListener("click", evalCalc);
-document.querySelector("#decimal").addEventListener("click", evalCalc);
+document.querySelector("#equals").addEventListener("click", evaluate);
+document.querySelector("#decimal").addEventListener("click", handleDecimal);
