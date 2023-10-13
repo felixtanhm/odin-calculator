@@ -53,7 +53,6 @@ const resetCalculator = () => {
 const evaluate = () => {
   if (currentOperator === "") return;
   if (operand2 === 0 && currentOperator === "/") {
-    // Prevent division by 0
     resetCalculator();
     display.textContent = "Infinity 🚀 & beyond? 👀";
     return;
