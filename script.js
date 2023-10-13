@@ -68,7 +68,11 @@ const evaluate = () => {
 // Event Handlers
 const handleOperandClick = (event) => {
   if (displayRefresh) {
-    display.textContent = event.target.textContent;
+    if (display.textContent.includes("-0")) {
+      display.textContent = "-" + event.target.textContent;
+    } else {
+      display.textContent = event.target.textContent;
+    }
     displayRefresh = false;
   } else {
     display.textContent = display.textContent + event.target.textContent;
@@ -86,7 +90,11 @@ const handleUtilClick = (event) => {
   let util = event.target.value;
   if (util === "clear") resetCalculator();
   else if (util === "sign") {
-    display.textContent = Number(display.textContent) * -1;
+    if (displayRefresh) {
+      display.textContent = "-0";
+    } else {
+      display.textContent = "-" + display.textContent;
+    }
   } else if (util === "hundreds") {
     display.textContent = Number(display.textContent) / 100;
   }
