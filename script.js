@@ -49,6 +49,16 @@ const resetCalculator = () => {
   display.textContent = "0";
 };
 
+const utilSign = () => {
+  if (display.textContent.includes("-")) {
+    display.textContent = display.textContent.replace("-", "");
+  } else if (displayRefresh) {
+    display.textContent = "-0";
+  } else {
+    display.textContent = "-" + display.textContent;
+  }
+};
+
 // Evaluation function
 const evaluate = () => {
   if (currentOperator === "") return;
@@ -89,13 +99,8 @@ const handleOperatorClick = (event) => {
 const handleUtilClick = (event) => {
   let util = event.target.value;
   if (util === "clear") resetCalculator();
-  else if (util === "sign") {
-    if (displayRefresh) {
-      display.textContent = "-0";
-    } else {
-      display.textContent = "-" + display.textContent;
-    }
-  } else if (util === "hundreds") {
+  else if (util === "sign") utilSign();
+  else if (util === "hundreds") {
     display.textContent = Number(display.textContent) / 100;
   }
 };
