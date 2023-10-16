@@ -50,12 +50,14 @@ const resetCalculator = () => {
 };
 
 const utilSign = () => {
-  if (display.textContent.includes("-")) {
-    display.textContent = display.textContent.replace("-", "");
-  } else if (displayRefresh) {
-    display.textContent = "-0";
+  if (displayRefresh) {
+    display.textContent.includes("-")
+      ? (display.textContent = "0")
+      : (display.textContent = "-0");
   } else {
-    display.textContent = "-" + display.textContent;
+    display.textContent.includes("-")
+      ? (display.textContent = display.textContent.replace("-", ""))
+      : (display.textContent = "-" + display.textContent);
   }
 };
 
