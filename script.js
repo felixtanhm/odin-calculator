@@ -51,9 +51,15 @@ const resetCalculator = () => {
 
 const utilSign = () => {
   if (displayRefresh) {
-    display.textContent.includes("-")
-      ? (display.textContent = "0")
-      : (display.textContent = "-0");
+    if (currentOperator) {
+      display.textContent.includes("-0")
+        ? (display.textContent = "0")
+        : (display.textContent = "-0");
+    } else {
+      display.textContent.includes("-")
+        ? (display.textContent = display.textContent.replace("-", ""))
+        : (display.textContent = "-" + display.textContent);
+    }
   } else {
     display.textContent.includes("-")
       ? (display.textContent = display.textContent.replace("-", ""))
