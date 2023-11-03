@@ -1,8 +1,21 @@
+/* TO FIX
+Colors of buttons
+Fonts of buttons
+OnClick color change of buttons
+Alignment of button contents
+Display of results in 1,000s do not display with a ,
+Display of results should have max cap of digits
+Display of results should be smaller font if more than x digits */
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   height: 100%;
 }
 
@@ -38,6 +51,7 @@ main {
 #display {
   width: 100%;
   font-size: 3rem;
+  padding-right: 12px;
   margin-bottom: 16px;
   text-align: right;
 }
