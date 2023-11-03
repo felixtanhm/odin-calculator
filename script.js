@@ -70,15 +70,14 @@ const utilSign = () => {
 // Evaluation function
 const evaluate = () => {
   if (currentOperator === "") return;
-  if (operand2 === 0 && currentOperator === "/") {
+  operand2 = display.textContent;
+  if (operand2 == 0 && currentOperator === "/") {
     resetCalculator();
-    display.textContent = "Infinity 🚀 & beyond? 👀";
+    display.textContent = "Infinity! 0.0";
     return;
   }
 
-  operand2 = display.textContent;
   let result = operate();
-
   resetCalculator();
   display.textContent = roundResult(result);
 };
