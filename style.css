@@ -81,11 +81,30 @@ main {
   width: 140px;
 }
 
+.operand,
+#decimal {
+  background-color: white;
+}
+
+.operand:active,
+#decimal:active {
+  background-color: black;
+}
+
 .operator,
 #equals {
   background-color: orange;
 }
 
+.operator:active,
+#equals:active {
+  background-color: black;
+}
+
 .util {
   background-color: grey;
+}
+
+.util:active {
+  background-color: black;
 }
