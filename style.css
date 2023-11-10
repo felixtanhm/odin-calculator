@@ -1,14 +1,23 @@
 /* TO FIX
 Colors of buttons
 Fonts of buttons
-OnClick color change of buttons
 Alignment of button contents
 Display of results in 1,000s do not display with a ,
 Display of results should have max cap of digits
 Display of results should be smaller font if more than x digits */
 
+:root {
+  --background-color: black;
+  --operand-color: #343434;
+  --special-btn-color: #a5a5a5;
+  --operand-active: #575757;
+  --operator-color: #ff9f0a;
+  --operator-active: #ffad32;
+}
+
 * {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: BlinkMacSystemFont, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
   box-sizing: border-box;
 }
 
@@ -20,7 +29,7 @@ body {
 }
 
 body {
-  background-color: black;
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
 }
@@ -28,11 +37,15 @@ body {
 header {
   display: flex;
   justify-content: center;
-  border-bottom: 2px solid orange;
+  border-bottom: 2px solid var(--operator-color);
 }
 
 h1,
-#display {
+#display,
+#equals,
+#decimal,
+.operator,
+.operand {
   color: white;
 }
 
@@ -67,7 +80,7 @@ main {
 }
 
 .btn {
-  border: 1px solid black;
+  border: 1px solid var(--background-color);
   border-radius: 50%;
   font-size: 2rem;
   width: 64px;
@@ -83,28 +96,28 @@ main {
 
 .operand,
 #decimal {
-  background-color: white;
+  background-color: var(--operand-color);
+}
+
+.util {
+  background-color: var(--special-btn-color);
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .operand:active,
+.util:active,
 #decimal:active {
-  background-color: black;
+  background-color: var(--operand-active);
 }
 
 .operator,
 #equals {
-  background-color: orange;
+  background-color: var(--operator-color);
+  font-size: 2.5rem;
 }
 
 .operator:active,
 #equals:active {
-  background-color: black;
-}
-
-.util {
-  background-color: grey;
-}
-
-.util:active {
   background-color: black;
 }
