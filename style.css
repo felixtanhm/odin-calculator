@@ -1,11 +1,3 @@
-/* TO FIX
-Colors of buttons
-Fonts of buttons
-Alignment of button contents
-Display of results in 1,000s do not display with a ,
-Display of results should have max cap of digits
-Display of results should be smaller font if more than x digits */
-
 :root {
   --background-color: black;
   --operand-color: #343434;
